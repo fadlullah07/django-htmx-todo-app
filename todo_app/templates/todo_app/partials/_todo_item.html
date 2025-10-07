@@ -3,12 +3,19 @@
         {{ todo.title }}
     </span>
     <div class="flex items-center space-x-2">
+        <button 
+            hx-get="{% url 'edit_todo' todo.pk %}"
+            hx-target="#todo-{{ todo.pk }}"
+            hx-swap="outerHTML"
+            class="px-3 py-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">
+            Edit
+        </button>
+        
         <button
             hx-post="{% url 'update_todo' todo.pk %}"
             hx-target="#todo-{{ todo.pk }}"
             hx-swap="outerHTML"
-            class="px-3 py-1 text-sm font-semibold text-white rounded-md 
-                   {% if todo.completed %}bg-yellow-500 hover:bg-yellow-600{% else %}bg-green-500 hover:bg-green-600{% endif %}">
+            class="px-3 py-1 text-sm font-semibold text-white rounded-md {% if todo.completed %}bg-yellow-500 hover:bg-yellow-600{% else %}bg-green-500 hover:bg-green-600{% endif %}">
             {% if todo.completed %}Undo{% else %}Complete{% endif %}
         </button>
         
