@@ -1,0 +1,51 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Django HTMX To-Do</title>
+    <link href="{% static 'todo_app/css/style.css' %}" rel="stylesheet"/>
+    <!-- <style> -->
+    <!--   body { -->
+    <!--     font-family: sans-serif; -->
+    <!--     max-width: 600px; -->
+    <!--     margin: auto; -->
+    <!--     padding: 20px; -->
+    <!--   } -->
+    <!--   .completed { -->
+    <!--     text-decoration: line-through; -->
+    <!--     color: #888; -->
+    <!--   } -->
+    <!--   ul { -->
+    <!--     list-style: none; -->
+    <!--     padding: 0; -->
+    <!--   } -->
+    <!--   li { -->
+    <!--     display: flex; -->
+    <!--     align-items: center; -->
+    <!--     justify-content: space-between; -->
+    <!--     padding: 8px 0; -->
+    <!--     border-bottom: 1px solid #ddd; -->
+    <!--   } -->
+    <!--   button { -->
+    <!--     margin-left: 10px; -->
+    <!--   } -->
+    <!-- </style> -->
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+
+    <script
+      src="https://unpkg.com/htmx.org@1.9.10"
+      integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+      crossorigin="anonymous"
+    ></script>
+ <script>
+        document.body.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        })
+    </script>
+  </body>
+</html>

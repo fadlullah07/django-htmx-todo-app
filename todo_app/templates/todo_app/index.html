@@ -1,0 +1,29 @@
+{% extends "todo_app/base.html" %}
+
+{% block content %}
+    <div class="max-w-2xl mx-auto mt-10">
+        <div class="p-6 bg-white rounded-lg shadow-md">
+            <h1 class="mb-4 text-3xl font-bold text-center text-gray-800">My To-Do List</h1>
+            <form 
+                hx-post="{% url 'add_todo' %}" 
+                hx-target="#todo-list" 
+                hx-swap="innerHTML"
+                hx-on::after-request="this.reset()"
+                class="flex mb-4">
+                {% csrf_token %}
+                <input type="text" name="title" placeholder="What needs to be done?" required
+                       class="flex-grow p-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button type="submit"
+                        class="px-4 py-2 font-bold text-white bg-blue-500 rounded-r-md hover:bg-blue-600">
+                    Add
+                </button>
+            </form>
+
+            <hr class="my-4">
+
+            <div id="todo-list" class="overflow-hidden rounded-md shadow-inner">
+                {% include "todo_app/partials/_todo_list.html" %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
